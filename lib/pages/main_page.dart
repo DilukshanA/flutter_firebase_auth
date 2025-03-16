@@ -17,7 +17,7 @@ class MainPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text("Main Page"),
-            Text("You are now sign in"),
+            Text("You are now signed in"),
             const SizedBox(
               height: 30,
             ),
