@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_auth/pages/home_page.dart';
 
 void main() async {
 
@@ -14,6 +15,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return MaterialApp(
+      //remove debug banner
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
+    );
   }
 }
