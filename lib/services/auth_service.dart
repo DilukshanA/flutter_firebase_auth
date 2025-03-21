@@ -29,14 +29,32 @@ class AuthService{
         print("Signed in Anonymously with uid: ${user.uid}");
       }
     }
-    
+    // exception handling
     on FirebaseAuthException catch(error){
-      print("Error sign in Anonymously: ${mapFirebaseAuthExceptionCode(error.code)}");
-      throw Exception(mapFirebaseAuthExceptionCode(error.code));
+      print("Error sign in Anonymously: ${mapFirebaseAuthExceptionCode(errorCode : error.code)}");
+      throw Exception(mapFirebaseAuthExceptionCode(errorCode : error.code));
     }
     
     catch(error){
       print("An unexpected error occurred: $error");
+    }
+  }
+
+  //sign out
+  Future<void> signOut() async {
+    try{
+      await _auth.signOut();
+      print("Signed out");
+    }
+
+    // exception handling
+    on FirebaseAuthException catch(error){
+      print("Error sign out ${mapFirebaseAuthExceptionCode(errorCode : error.code)}");
+      throw Exception(mapFirebaseAuthExceptionCode(errorCode: error.code));
+    }
+
+     catch(error){
+      print("Error sign out: $error");
     }
   }
 

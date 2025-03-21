@@ -1,4 +1,4 @@
-String mapFirebaseAuthExceptionCode(String errorCode){
+String mapFirebaseAuthExceptionCode({required String errorCode}){
     switch (errorCode) {
     // signInWithEmailAndPassword
     case 'wrong-password':
