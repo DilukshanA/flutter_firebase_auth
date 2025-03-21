@@ -7,7 +7,7 @@ class AnonymousLoginPage extends StatelessWidget {
 
   void _signInAnonymously(BuildContext context) async{
     try{
-      await AuthService().signInAnonymously();
+      await AuthService().signInAnonymouslyWithExceptions();
 
       //navigate to main page
       if(context.mounted){
