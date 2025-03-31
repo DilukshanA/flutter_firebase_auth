@@ -62,7 +62,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
               // create a text field for confirm password
               TextFormField(
-                controller: _passwordController,
+                controller: _confirmPasswordController,
                 obscureText: true,
                 decoration: const InputDecoration(
                   labelText: "Confirm Password"
