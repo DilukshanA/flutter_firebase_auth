@@ -1,0 +1,93 @@
+import 'package:flutter/material.dart';
+
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
+  final _formkey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Register"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Form(
+          key: _formkey,
+          child: Column(
+            children: [
+              // create a text field for email
+              TextFormField(
+                controller: _emailController,
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(
+                  labelText: "Email"
+                ),
+                validator: (value){
+                  if(value == null || value.isEmpty){
+                    return "Please enter an email";
+                  } else if(!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)){
+                    return "Please enter a valid email";
+                  }
+                  return null;
+                },
+              ),
+
+              // create a text field for password
+              TextFormField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: "Password"
+                ),
+                validator: (value) {
+                  if(value == null || value.isEmpty){
+                    return "Please enter a password";
+                  } else if(value.length < 6){
+                    return "Password must be at least 6 characters long";
+                  }
+                  return null;
+                },
+              ),
+
+              // create a text field for confirm password
+              TextFormField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: "Confirm Password"
+                ),
+                validator: (value) {
+                  if(value == null || value.isEmpty){
+                    return "Please confirm your password";
+                  } else if(value != _passwordController.text){
+                    return "Password do not match";
+                  }
+                  return null;
+                },
+              ),
+
+              const SizedBox(height: 20),
+
+              // create register button
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text("Resister"),
+              ),
+            ],
+          )
+        ),
+      ),
+    );
+  }
+}
