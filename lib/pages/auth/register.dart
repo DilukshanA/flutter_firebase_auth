@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_auth/pages/auth/login.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -83,6 +84,25 @@ class _RegisterPageState extends State<RegisterPage> {
               ElevatedButton(
                 onPressed: () {},
                 child: const Text("Resister"),
+              ),
+
+              const SizedBox(height: 20),
+
+              // create a text button for login
+              TextButton(
+                onPressed: (){
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginPage(),
+                    )
+                  );
+                },
+                child: const Text('Already have an account? Login here',
+                style: TextStyle(
+                  color: Colors.blue,
+                ),
+                ),
               ),
             ],
           )
