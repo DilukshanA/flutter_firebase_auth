@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_auth/pages/auth/login.dart';
+import 'package:flutter_firebase_auth/pages/main_page.dart';
+import 'package:flutter_firebase_auth/services/auth_service.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -14,6 +16,70 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController = TextEditingController();
   final _formkey = GlobalKey<FormState>();
+
+  bool _isLoading = false;
+
+  //register method
+  Future<void> _registerUser() async {
+    if(!_formkey.currentState!.validate()){
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    try{
+      final email = _emailController.text.trim();
+      final password = _passwordController.text.trim();
+      final confirmPassword = _confirmPasswordController.text.trim();
+
+      if(password != confirmPassword){
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text("Error"),
+            content: const Text("Password do not match"),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text("OK"),
+              )
+            ],
+          )
+        );
+
+        return;
+      }
+
+      await AuthService().registerNewUser(email: email, password: password);
+      // navigate to home page
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MainPage(),
+        ),
+      );
+    } catch(error) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text("Error"),
+            content: const Text("Error registering user"),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text("OK"),
+              )
+            ],
+          )
+        );
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,8 +148,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
               // create register button
               ElevatedButton(
-                onPressed: () {},
-                child: const Text("Resister"),
+                onPressed: _registerUser,
+                child: _isLoading
+                ? const CircularProgressIndicator()
+                : const Text("Resister"),
               ),
 
               const SizedBox(height: 20),
