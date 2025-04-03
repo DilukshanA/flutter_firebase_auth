@@ -68,7 +68,12 @@ class _RegisterPageState extends State<RegisterPage> {
             content: const Text("Error registering user"),
             actions: [
               TextButton(
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  setState(() {
+                    _isLoading = false;
+                  });
+                },
                 child: const Text("OK"),
               )
             ],
