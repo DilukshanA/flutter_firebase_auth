@@ -49,7 +49,12 @@ class _LoginPageState extends State<LoginPage> {
             content: Text('Error signing user : $error'),
             actions: [
               TextButton(
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  setState(() {
+                    _isLoading = false;
+                  });
+                },
                 child: const Text("OK"),
               )
             ],
