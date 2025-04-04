@@ -100,6 +100,13 @@ class AuthService{
       print("Error signing in user: $error");
     }
   }
+
+  //sign in with google
+  Future<void> signWithGoogle() async {
+    try{} catch(error){
+      print("Error signing in with Google: $error");
+    }
+  }
   
 }
 
