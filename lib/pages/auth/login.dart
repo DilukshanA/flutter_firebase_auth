@@ -63,6 +63,45 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  // sign in with google method
+  Future<void> _signInWithGoogle() async {
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    try{
+      await AuthService().signInWithGoogle();
+
+      // navigate to home page
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MainPage(),
+        ),
+      );
+    } catch(error){
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text("Error"),
+            content: Text('Error sign in with Google : $error'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  setState(() {
+                    _isLoading = false;
+                  });
+                },
+                child: const Text("OK"),
+              )
+            ],
+          )
+        );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
