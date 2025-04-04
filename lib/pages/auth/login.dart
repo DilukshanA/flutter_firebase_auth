@@ -150,13 +150,23 @@ class _LoginPageState extends State<LoginPage> {
 
               const SizedBox(height: 20),
 
-              // create register button
+              // create login button
               ElevatedButton(
                 onPressed: _signInUser,
                 child: _isLoading
                 ? const CircularProgressIndicator()
                 : const Text("Login"),
               ),
+
+              const SizedBox(height: 20),
+
+              //create button for google sign in
+              ElevatedButton(
+                onPressed: _signInWithGoogle,
+                child: _isLoading
+                ? const CircularProgressIndicator()
+                : const Text("Sign in with Google")
+              ),          
 
               const SizedBox(height: 20),
 
