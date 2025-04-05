@@ -135,6 +135,24 @@ class AuthService{
       print("Error signing in with Google: $error");
     }
   }
+
+  //send password reset email
+  Future<void> sendPasswordResetEmail({required String email}) async {
+    try{
+      await _auth.sendPasswordResetEmail(email: email);
+      print("Password reset email sent to $email");
+    }
+
+    // exception handling
+    on FirebaseAuthException catch(error){
+      print("Error sending password reset email: ${mapFirebaseAuthExceptionCode(errorCode : error.code)}");
+      throw Exception(mapFirebaseAuthExceptionCode(errorCode: error.code));
+    }
+    
+    catch(error){
+      print("Error sending password reset email: $error");
+    }
+  }
   
 }
 
