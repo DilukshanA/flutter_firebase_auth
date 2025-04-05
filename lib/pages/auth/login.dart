@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_auth/pages/auth/forgot_password_page.dart';
 import 'package:flutter_firebase_auth/pages/auth/register.dart';
 import 'package:flutter_firebase_auth/pages/main_page.dart';
 import 'package:flutter_firebase_auth/services/auth_service.dart';
@@ -167,6 +168,26 @@ class _LoginPageState extends State<LoginPage> {
                 ? const CircularProgressIndicator()
                 : const Text("Sign in with Google")
               ),          
+
+              const SizedBox(height: 20),
+
+              // create a text button for forgot password
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ForgotPasswordPage(),
+                    )
+                  );
+                },
+                child: const Text(
+                  "Forgot Password?",
+                  style: TextStyle(
+                    color: Colors.blue,
+                  ),
+                ),
+              ),
 
               const SizedBox(height: 20),
 
