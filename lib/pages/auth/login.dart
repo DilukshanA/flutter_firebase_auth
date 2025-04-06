@@ -18,6 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formkey = GlobalKey<FormState>();
 
   bool _isLoading = false;
+  bool _obscurePassword = true;
 
   //sign in user method
   Future<void> _signInUser() async {
@@ -135,9 +136,21 @@ class _LoginPageState extends State<LoginPage> {
               // create a text field for password
               TextFormField(
                 controller: _passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: "Password"
+                obscureText: _obscurePassword,
+                decoration: InputDecoration(
+                  labelText: "Password",
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
+                    icon: Icon(
+                      _obscurePassword
+                      ? Icons.visibility_off
+                      : Icons.visibility,
+                    )
+                  )
                 ),
                 validator: (value) {
                   if(value == null || value.isEmpty){
