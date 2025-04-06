@@ -19,6 +19,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   bool _isLoading = false;
   bool _obscurePassword = true;
+   bool _obscureConfirmPassword = true;
 
   //register method
   Future<void> _registerUser() async {
@@ -148,9 +149,21 @@ class _RegisterPageState extends State<RegisterPage> {
               // create a text field for confirm password
               TextFormField(
                 controller: _confirmPasswordController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: "Confirm Password"
+                obscureText: _obscureConfirmPassword,
+                decoration: InputDecoration(
+                  labelText: "Confirm Password",
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _obscureConfirmPassword = !_obscureConfirmPassword;
+                      });
+                    },
+                    icon: Icon(
+                      _obscureConfirmPassword
+                      ? Icons.visibility_off
+                      : Icons.visibility,
+                    )
+                  )
                 ),
                 validator: (value) {
                   if(value == null || value.isEmpty){
