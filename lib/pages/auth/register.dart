@@ -18,6 +18,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _formkey = GlobalKey<FormState>();
 
   bool _isLoading = false;
+  bool _obscurePassword = true;
 
   //register method
   Future<void> _registerUser() async {
@@ -118,9 +119,21 @@ class _RegisterPageState extends State<RegisterPage> {
               // create a text field for password
               TextFormField(
                 controller: _passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: "Password"
+                obscureText: _obscurePassword,
+                decoration: InputDecoration(
+                  labelText: "Password",
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
+                    icon: Icon(
+                      _obscurePassword
+                      ? Icons.visibility_off
+                      : Icons.visibility,
+                    )
+                  )
                 ),
                 validator: (value) {
                   if(value == null || value.isEmpty){
