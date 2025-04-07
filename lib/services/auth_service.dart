@@ -46,7 +46,10 @@ class AuthService{
   //sign out
   Future<void> signOut() async {
     try{
+      // sign out from firebase
       await _auth.signOut();
+      // sign out from google
+      await _googleSignIn.signOut();
       print("Signed out");
     }
 
