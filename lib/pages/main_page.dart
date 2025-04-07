@@ -7,6 +7,7 @@ class MainPage extends StatelessWidget {
 
   final String usreId = AuthService().getCurretUser()?.uid ?? "unknown";
   final String userEmail = AuthService().getCurretUser()?.email ?? "no email";
+  final String userPhotoUrl = AuthService().getCurretUser()?.photoURL ?? "no photo";
 
   //create signout method
   void _signOut(BuildContext context) async {
@@ -38,6 +39,19 @@ class MainPage extends StatelessWidget {
               height: 30,
             ),
             Text("User Email: $userEmail"),
+            const SizedBox(
+              height: 30,
+            ),
+            // show user photo
+            userPhotoUrl != "no photo"
+            ? CircleAvatar(
+              radius: 40,
+              backgroundImage: NetworkImage(userPhotoUrl),
+            )
+            : const CircleAvatar(
+              radius: 40,
+              child: Icon(Icons.person),
+            ),
             const SizedBox(
               height: 30,
             ),
