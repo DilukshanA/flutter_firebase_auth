@@ -6,6 +6,7 @@ class MainPage extends StatelessWidget {
   MainPage({super.key});
 
   final String usreId = AuthService().getCurretUser()?.uid ?? "unknown";
+  final String userEmail = AuthService().getCurretUser()?.email ?? "no email";
 
   //create signout method
   void _signOut(BuildContext context) async {
@@ -33,6 +34,10 @@ class MainPage extends StatelessWidget {
               height: 30,
             ),
             Text('User ID: $usreId'),
+            const SizedBox(
+              height: 30,
+            ),
+            Text("User Email: $userEmail"),
             const SizedBox(
               height: 30,
             ),
